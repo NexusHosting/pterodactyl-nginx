@@ -1,5 +1,5 @@
 FROM ubuntu:latest
-
+ENV DEBIAN_FRONTEND noninteractive
 RUN apt update -y
 RUN apt -y install software-properties-common curl apt-transport-https ca-certificates gnupg
 
