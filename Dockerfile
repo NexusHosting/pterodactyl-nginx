@@ -4,14 +4,12 @@ RUN apt update -y
 RUN apt -y install software-properties-common curl apt-transport-https ca-certificates gnupg
 
 RUN LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php
-RUN add-apt-repository -y ppa:chris-lea/redis-server
-RUN curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash
 
 RUN apt update
 
 RUN apt-add-repository universe
 
-RUN apt -y install php8.0 php8.0-{cli,gd,mysql,pdo,mbstring,tokenizer,bcmath,xml,fpm,curl,zip} mariadb-server nginx tar unzip git redis-server
+RUN apt -y install php8.0 php8.0-{cli,gd,mysql,pdo,mbstring,tokenizer,bcmath,xml,fpm,curl,zip} nginx tar unzip git
 
 USER container
 ENV  USER container
