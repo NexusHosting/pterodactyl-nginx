@@ -1,5 +1,6 @@
 FROM ubuntu:latest
 
+RUN apt update -y
 RUN apt -y install software-properties-common curl apt-transport-https ca-certificates gnupg
 
 RUN LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php
