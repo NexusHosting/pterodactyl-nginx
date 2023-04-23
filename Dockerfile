@@ -1,7 +1,16 @@
 FROM alpine:latest
 
-RUN apk --update --no-cache add ca-certificates nginx
-RUN apk add --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted php8 php8-fpm php8-mcrypt php8-soap php8-openssl php8-gmp php8-pdo_odbc php8-json php8-dom php8-pdo php8-zip php8-mysqli php8-sqlite3 php8-apcu php8-pdo_pgsql php8-bcmath php8-gd php8-odbc php8-pdo_mysql php8-pdo_sqlite php8-gettext php8-xmlreader php8-xmlrpc php8-bz2 php8-iconv php8-pdo_dblib php8-curl php8-ctype php8-phar php8-fileinfo php8-mbstring php8-tokenizer
+RUN apt -y install software-properties-common curl apt-transport-https ca-certificates gnupg
+
+RUN LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php
+RUN add-apt-repository -y ppa:chris-lea/redis-server
+RUN curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash
+
+RUN apt update
+
+RUN apt-add-repository universe
+
+RUN apt -y install php8.0 php8.0-{cli,gd,mysql,pdo,mbstring,tokenizer,bcmath,xml,fpm,curl,zip} mariadb-server nginx tar unzip git redis-server
 
 USER container
 ENV  USER container
@@ -12,3 +21,4 @@ WORKDIR /home/container
 COPY ./entrypoint.sh /entrypoint.sh
 
 CMD ["/bin/ash", "/entrypoint.sh"]
+
