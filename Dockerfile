@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM ubuntu:latest
 
 RUN apt -y install software-properties-common curl apt-transport-https ca-certificates gnupg
 
